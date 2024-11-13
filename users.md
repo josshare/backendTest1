@@ -1,4 +1,4 @@
-### Users Crud
+### Users CRUD
 
 Para el dominio de Users, vamos a necesitar que el usuario pueda registrarse por primera vez con sus datos (email, password), asimismo comprobar que no pueda hacerlo nuevamente si ya se encuentra registrado.
 
