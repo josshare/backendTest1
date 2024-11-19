@@ -30,6 +30,7 @@ dbConnect()
     res.send('Hello World!');
   });
 
+
 app.use(express.json());
 app.use(router);
 app.listen(3000, () => {
