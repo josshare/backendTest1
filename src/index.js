@@ -75,8 +75,21 @@ router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, 
     });
 }); });
 router.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.json({ message: 'Hello, world!' });
 });
+router.get('/users', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, ModelUser.find()];
+            case 1:
+                users = _a.sent();
+                res.json(users);
+                console.log(users);
+                return [2 /*return*/];
+        }
+    });
+}); });
 app.use(express.json());
 app.use(router);
 app.listen(3000, function () {

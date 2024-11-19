@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = require("mongoose");
 var dotenv = require('dotenv');
 dotenv.config();
-var DB_URI = process.env.MONGODB_URI || 'mongodb://admin:adminpassword@localhost:27017/';
+var DB_URI = process.env.MONGODB_URI || 'mongodb://admin:adminpassword@localhost:27017/user_management?authSource=admin';
 var dbConnect = function () { return __awaiter(void 0, void 0, void 0, function () {
     var options, error_1;
     return __generator(this, function (_a) {

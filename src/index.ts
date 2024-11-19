@@ -27,7 +27,12 @@ dbConnect()
     res.send(respuesta);
   });
   router.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.json({ message: 'Hello, world!' });
+  });
+  router.get('/users', async (req, res) => {
+    const users = await ModelUser.find();
+    res.json(users);
+    console.log(users);
   });
 
 
