@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const DB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/user_management';
+const DB_URI = process.env.MONGODB_URI || 'mongodb://admin:adminpassword@localhost:27017/';
 
 const dbConnect = async (): Promise<void> => {
   try {

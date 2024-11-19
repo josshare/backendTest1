@@ -1,4 +1,6 @@
 const express = require('express');
+const ModelUser = require('./models/User');
+import { Model } from 'mongoose';
 import dbConnect from './config';
 const app = express();
 
@@ -19,9 +21,10 @@ dbConnect()
 
 
   const router = express.Router();
-  router.post('/', (req, res) => {
+  router.post('/', async (req, res) => {
     const body = req.body;
-    res.send(body);
+    const respuesta = await ModelUser.create(body);
+    res.send(respuesta);
   });
   router.get('/', (req, res) => {
     res.send('Hello World!');
