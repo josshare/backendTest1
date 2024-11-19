@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -7,9 +7,7 @@ const DB_URI = process.env.MONGODB_URI || 'mongodb://admin:adminpassword@localho
 
 const dbConnect = async (): Promise<void> => {
   try {
-    const options = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    const options: mongoose.ConnectOptions = {
     };
 
     await mongoose.connect(DB_URI, options);

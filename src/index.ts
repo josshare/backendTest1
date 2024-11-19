@@ -1,5 +1,5 @@
 const express = require('express');
-const ModelUser = require('./models/User');
+const ModelUser = require('./models/user');
 import { Model } from 'mongoose';
 import dbConnect from './config';
 const app = express();
