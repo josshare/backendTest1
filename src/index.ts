@@ -1,7 +1,8 @@
 const express = require('express');
 const ModelUser = require('./models/user');
 import { Model } from 'mongoose';
-import dbConnect from './config';
+const dbConnect = require('./config');
+//import dbConnect from './config';
 const app = express();
 
 // Using async/await
@@ -28,11 +29,6 @@ dbConnect()
   });
   router.get('/', (req, res) => {
     res.json({ message: 'Hello, world!' });
-  });
-  router.get('/users', async (req, res) => {
-    const users = await ModelUser.find();
-    res.json(users);
-    console.log(users);
   });
 
 

@@ -90,6 +90,39 @@ router.get('/users', function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); });
+router.get('/users/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                return [4 /*yield*/, ModelUser.findById(id)];
+            case 1:
+                user = _a.sent();
+                res.json(user);
+                return [2 /*return*/];
+        }
+    });
+}); });
+router.get('/users/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, limit, offset, users;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = req.query.id, limit = _a.limit, offset = _a.offset;
+                if (!(limit && offset)) return [3 /*break*/, 2];
+                return [4 /*yield*/, ModelUser.find().limit(parseInt(limit)).skip(parseInt(offset))];
+            case 1:
+                users = _b.sent();
+                res.json(users);
+                return [3 /*break*/, 3];
+            case 2:
+                res.json("No se encontraron usuarios");
+                _b.label = 3;
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
 app.use(express.json());
 app.use(router);
 app.listen(3000, function () {
