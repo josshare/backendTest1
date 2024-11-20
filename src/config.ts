@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const DB_URI = process.env.MONGODB_URI || 'mongodb://admin:adminpassword@localhost:27017/user_management?authSource=admin';
 
-const dbConnect = async (): Promise<void> => {
+export const dbConnect = async (): Promise<void> => {
   try {
     const options: mongoose.ConnectOptions = {
     };
