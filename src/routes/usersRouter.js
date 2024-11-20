@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,52 +34,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+var _this = this;
+var Router = require('express').Router;
+var ModelUser = require('../models/user');
 var express = require('express');
-var ModelUser = require('./models/user');
-var routerApi = require('./routes');
-var config_1 = require("./config");
-var app = express();
-// Using async/await
-var initDatabase = function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, (0, config_1.default)()];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); };
-// Or using promises
-(0, config_1.default)()
-    .then(function () {
-    // rest of your app initialization
-})
-    .catch(function (error) {
-    console.error('Failed to initialize database:', error);
-});
 var router = express.Router();
-router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var body, respuesta;
+router.get('/', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var users;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                body = req.body;
-                return [4 /*yield*/, ModelUser.create(body)];
+            case 0: return [4 /*yield*/, ModelUser.find()];
             case 1:
-                respuesta = _a.sent();
-                res.send(respuesta);
+                users = _a.sent();
+                res.json(users);
+                console.log(users);
                 return [2 /*return*/];
         }
     });
 }); });
-router.get('/', function (req, res) {
-    res.json({ message: 'Hello, world!' });
-});
-routerApi(app);
-app.use(express.json());
-app.use(router);
-app.listen(3000, function () {
-    console.log('Server is running on port 3000');
-});
+router.get('/:id', function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var id, user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                return [4 /*yield*/, ModelUser.findById(id)];
+            case 1:
+                user = _a.sent();
+                res.json(user);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//router.get('/users/', async (req, res) => {
+//    const { limit, offset } = req.query.id;
+//    if (limit && offset) {
+//       const users = await ModelUser.find().limit(parseInt(limit)).skip(parseInt(offset));
+//        res.json(users);
+//    } else {
+//        res.json("No se encontraron usuarios");
+//    }
+//}
+//)
+module.exports = router;

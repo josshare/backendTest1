@@ -1,8 +1,8 @@
 const express = require('express');
 const ModelUser = require('./models/user');
+const routerApi = require('./routes');
 import { Model } from 'mongoose';
-const dbConnect = require('./config');
-//import dbConnect from './config';
+import dbConnect from './config';
 const app = express();
 
 // Using async/await
@@ -30,7 +30,7 @@ dbConnect()
   router.get('/', (req, res) => {
     res.json({ message: 'Hello, world!' });
   });
-
+routerApi(app);
 
 app.use(express.json());
 app.use(router);

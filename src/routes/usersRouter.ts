@@ -1,5 +1,8 @@
 const { Router } = require('express');
+const ModelUser = require('../models/user');
+const express = require('express');
 const router = express.Router();
+
 
 router.get('/', async (req, res) => {
     const users = await ModelUser.find();
@@ -22,4 +25,4 @@ router.get('/:id', async (req, res) => {
 //}
 //)
 
-module exports = router;
+module.exports = router;
