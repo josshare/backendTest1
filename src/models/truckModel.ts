@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-import { Document, Schema } from 'mongoose';
+//const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 import { ITruck } from '../interfaces/truckInterface';
 const truckModel = new mongoose.Schema({
     user: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     year: {
@@ -11,11 +11,14 @@ const truckModel = new mongoose.Schema({
         required: true
     },
     color: {
-        type: Number,
+        type: String,
         required: true
     },
-    plate: {
+    plates: {
         type: String,
         required: true
     }
 });
+
+const TruckModel = mongoose.models.Truck || mongoose.model<ITruck & Document>('Truck', truckModel);
+export default TruckModel;

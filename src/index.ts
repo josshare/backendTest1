@@ -1,5 +1,6 @@
 import express from 'express';
 import userRouter from './routes/userRouter';
+import truckRouter from './routes/truckRouter';
 import { dbConnect } from './config';
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.json());
 
 // Routes
 app.use('/users', userRouter);
+app.use('/trucks', truckRouter);
 
 // Connect to database and start server
 dbConnect().then(() => {

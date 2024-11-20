@@ -1,36 +1,41 @@
-const express = require('express');
-const router = express.Router();
-const ModelTruck = require('../models/truckModel');
-
-
-
+import express from 'express';
 import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import Truck from '../models/truckModel';
+import User from '../models/userModel';
 
-router.get('/', async (req: Request, res: Response) => {
-    const trucks = await ModelTruck.find();
-    res.json(trucks);
-    console.log(trucks);
-});
-router.get('/:id', async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const truck = await ModelTruck.findById(id);
-    res.json(truck);
-});
+const router = express.Router();
+
 router.post('/', async (req: Request, res: Response) => {
-    const body = req.body;
-    const response = await ModelTruck.create(body);
-    res.send(response);
-});
-router.put('/:id', async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const body = req.body;
-    const response = await ModelTruck.findByIdAndUpdate(id, body);
-    res.send(response);
-});
-router.delete('/:id', async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const response = await ModelTruck.findByIdAndDelete(id);
-    res.send(response);
+    try {
+        let user;
+        // Check if the user input is a valid ObjectId
+        if (mongoose.Types.ObjectId.isValid(req.body.user)) {
+            user = await User.findById(req.body.user);
+        } else {
+            // If not an ObjectId, try to find by email
+            user = await User.findOne({ email: req.body.user });
+        }
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        const truckData = {
+            user: user._id,
+            year: req.body.year,
+            color: req.body.color,
+            plates: req.body.plate
+        };
+        
+        const truck = await Truck.create(truckData);
+        res.status(201).json(truck);
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: error.message });
+        } else {
+            res.status(400).json({ message: 'An unknown error occurred' });
+        }
+    }
 });
 
-module.exports = router;
+export default router;
