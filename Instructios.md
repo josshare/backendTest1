@@ -1,6 +1,12 @@
-
+Vamos a necesitar Initializar el proyecto con Docker y Docker Compose
+para levantar la base de datos.
 
 Run docker-compose up -d
+
+Ya que verificamos que la base de datos esta corriendo
+podemos correr el proyecto con el comando 
+
+npm run dev
 
 
 # Trucks Endpoint Instructions
